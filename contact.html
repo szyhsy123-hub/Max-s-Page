@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>个人作品集 | Max | 梦幻科技美学</title>
+    
+    <!-- Tailwind CSS 及其插件 -->
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    
+    <!-- Google Fonts: Inter 用于 UI，Roboto Mono 用于代码风格 -->
+    <link href="https://fonts.googleapis.com" rel="preconnect"/>
+    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Roboto+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+    
+    <script>
+        // Tailwind 配置扩展
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        mono: ['Roboto Mono', 'monospace'],
+                    },
+                    colors: {
+                        apple: {
+                            gray: '#f5f5f7',
+                            blue: '#0071e3',
+                            softPink: '#fef2f2',
+                            softBlue: '#f0f9ff',
+                            glass: 'rgba(255, 255, 255, 0.7)',
+                        }
+                    },
+                    backdropBlur: {
+                        xs: '2px',
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <style data-purpose="glassmorphism-and-animations">
+        /* 全局样式与动画 */
+        :root {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background: radial-gradient(circle at top left, #fdf2f8 0%, #f0f9ff 30%, #ffffff 100%);
+            background-attachment: fixed;
+            font-family: 'Inter', sans-serif;
+            color: #1d1d1f;
+        }
+
+        /* 玻璃拟态卡片效果 */
+        .glass-card {
+            background: rgba(255, 255, 255, 0.6);
+            backdrop-filter: blur(20px) saturate(180%);
+            -webkit-backdrop-filter: blur(20px) saturate(180%);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 24px;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .glass-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.04);
+            background: rgba(255, 255, 255, 0.75);
+        }
+
+        /* 苹果风格渐变文字 */
+        .apple-gradient-text {
+            background: linear-gradient(135deg, #1d1d1f 0%, #434343 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* 自定义细描边图标模拟 */
+        .sf-icon {
+            font-weight: 200;
+            font-style: normal;
+        }
+
+        /* 渐现进入动画 */
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .reveal-hidden {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 1s cubic-bezier(0.2, 0.8, 0.2, 1), transform 1s cubic-bezier(0.2, 0.8, 0.2, 1);
+        }
+
+        .reveal-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .animate-reveal {
+            animation: fadeInUp 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+        }
+
+        /* 背景视差装饰层 */
+        .parallax-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            overflow: hidden;
+        }
+
+        .blob {
+            position: absolute;
+            width: 500px;
+            height: 500px;
+            background: linear-gradient(135deg, #e0e7ff 0%, #fdf2f8 100%);
+            filter: blur(80px);
+            border-radius: 50%;
+            opacity: 0.6;
+        }
+    </style>
+</head>
+<body class="antialiased selection:bg-blue-100 selection:text-blue-900">
+
+    <!-- 模块 0: 背景装饰 -->
+    <div class="parallax-bg" data-purpose="background-decoration">
+        <div class="blob" style="top: -100px; right: -100px;"></div>
+        <div class="blob" style="bottom: -150px; left: -100px; background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);"></div>
+    </div>
+
+    <!-- 模块 1: 顶部导航栏 -->
+    <nav class="fixed top-0 w-full z-50 px-6 py-4" data-purpose="main-navigation">
+        <div class="max-w-6xl mx-auto flex justify-between items-center glass-card px-4 py-2 border-none">
+            <div class="text-lg font-semibold tracking-tight ml-2">Max</div>
+            <div class="hidden md:flex gap-2 text-sm font-medium">
+                <a class="px-4 py-2 rounded-full hover:bg-white/40 transition-all text-gray-600 hover:text-black" href="#cv">职业生涯</a>
+                <a class="px-4 py-2 rounded-full hover:bg-white/40 transition-all text-gray-600 hover:text-black" href="#event">近期活动</a>
+                <a class="px-4 py-2 rounded-full hover:bg-white/40 transition-all text-gray-600 hover:text-black" href="#blog">文章观点</a>
+            </div>
+            <button class="bg-black text-white px-5 py-2 rounded-full text-sm font-medium hover:opacity-80 transition-opacity">
+                联系我
+            </button>
+        </div>
+    </nav>
+
+    <!-- 主体内容区域 -->
+    <main class="max-w-5xl mx-auto pt-32 px-6 space-y-32 pb-32">
+        
+        <!-- 模块 2: 职业背景部分 -->
+        <section class="animate-reveal" data-purpose="career-summary" id="cv">
+            <div class="grid grid-cols-1 md:grid-cols-12 gap-12">
+                <div class="md:col-span-5">
+                    <h1 class="text-5xl md:text-6xl font-bold tracking-tight apple-gradient-text leading-[1.1]">
+                        设计 <br/>体验的 <br/>未来。
+                    </h1>
+                    <p class="mt-8 text-xl text-gray-500 font-light leading-relaxed">
+                        资深产品设计师与创意开发，现居旧金山，专注于以人为本的数字化界面设计。
+                    </p>
+                </div>
+                <div class="md:col-span-7 space-y-8">
+                    <div class="glass-card p-8" data-purpose="timeline">
+                        <h3 class="text-xs font-mono uppercase tracking-widest text-gray-400 mb-8">职业时间线</h3>
+                        <div class="space-y-10">
+                            <!-- 工作 1 -->
+                            <div class="relative pl-8 border-l border-gray-100">
+                                <div class="absolute w-3 h-3 bg-blue-500 rounded-full -left-[6.5px] top-1.5 shadow-[0_0_10px_rgba(59,130,246,0.5)]"></div>
+                                <div class="flex justify-between items-start">
+                                    <div>
+                                        <h4 class="font-semibold text-lg">首席交互设计师</h4>
+                                        <p class="text-gray-500">Apple Interactive Inc.</p>
+                                    </div>
+                                    <span class="text-xs font-mono bg-white px-2 py-1 rounded border border-gray-100">2021 — 至今</span>
+                                </div>
+                            </div>
+                            <!-- 工作 2 -->
+                            <div class="relative pl-8 border-l border-gray-100">
+                                <div class="absolute w-3 h-3 bg-gray-200 rounded-full -left-[6.5px] top-1.5"></div>
+                                <div class="flex justify-between items-start">
+                                    <div>
+                                        <h4 class="font-semibold text-lg">资深 UI 架构师</h4>
+                                        <p class="text-gray-500">Fluid Systems Research</p>
+                                    </div>
+                                    <span class="text-xs font-mono bg-white px-2 py-1 rounded border border-gray-100">2018 — 2021</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 模块 3: 精彩活动部分 -->
+        <section class="reveal-hidden" data-purpose="featured-event" id="event">
+            <div class="glass-card overflow-hidden relative group">
+                <div class="absolute inset-0 bg-gradient-to-r from-blue-50 to-transparent opacity-50"></div>
+                <div class="relative p-10 md:p-16 flex flex-col md:flex-row items-center gap-12">
+                    <div class="flex-1 space-y-6">
+                        <span class="inline-block px-3 py-1 bg-white text-blue-600 rounded-full text-xs font-bold tracking-wider uppercase border border-blue-100">活动预告</span>
+                        <h2 class="text-4xl font-bold tracking-tight">意识设计：<br/>2024 AI 研讨会</h2>
+                        <p class="text-gray-500 text-lg max-w-md">加入我的主题演讲，共同探讨生成式美学与用户心理学的交叉点。</p>
+                        <div class="flex gap-4">
+                            <div class="flex flex-col">
+                                <span class="text-xs text-gray-400 font-mono">地点</span>
+                                <span class="font-medium">旧金山 Moscone Center</span>
+                            </div>
+                            <div class="w-px h-10 bg-gray-200 mx-2"></div>
+                            <div class="flex flex-col">
+                                <span class="text-xs text-gray-400 font-mono">日期</span>
+                                <span class="font-medium">2024年10月14日</span>
+                            </div>
+                        </div>
+                        <button class="mt-4 px-8 py-3 bg-blue-600 text-white rounded-full font-medium hover:bg-blue-700 transition-colors shadow-lg shadow-blue-200">
+                            感兴趣 / 注册
+                        </button>
+                    </div>
+                    <div class="w-full md:w-1/3 aspect-square bg-gradient-to-br from-blue-100 to-indigo-100 rounded-3xl flex items-center justify-center relative overflow-hidden">
+                        <!-- 抽象 SVG 活动图形 -->
+                        <svg class="opacity-40 animate-[spin_20s_linear_infinite]" height="200" viewbox="0 0 200 200" width="200">
+                            <circle class="text-blue-500" cx="100" cy="100" fill="none" r="80" stroke="currentColor" stroke-width="0.5"></circle>
+                            <path class="text-blue-600" d="M100 20 A80 80 0 0 1 180 100" fill="none" stroke="currentColor" stroke-width="4"></path>
+                        </svg>
+                        <div class="absolute inset-0 flex items-center justify-center text-6xl">🗓️</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 模块 4: 博客文章网格 -->
+        <section class="reveal-hidden" data-purpose="blog-feed" id="blog">
+            <div class="flex justify-between items-end mb-12">
+                <div>
+                    <h2 class="text-3xl font-bold tracking-tight">日志</h2>
+                    <p class="text-gray-500 mt-2">关于工艺、代码与好奇心的随笔。</p>
+                </div>
+                <a class="text-blue-600 font-medium hover:underline flex items-center gap-1" href="#">
+                    查看全部 
+                    <svg fill="none" height="16" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24" width="16"><path d="M5 12h14M12 5l7 7-7 7"></path></svg>
+                </a>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- 博客卡片 1 -->
+                <article class="reveal-hidden glass-card p-6 flex flex-col h-full group" data-purpose="blog-card" style="transition-delay: 0.1s;">
+                    <div class="w-full aspect-[4/3] bg-gray-100 rounded-xl mb-6 overflow-hidden">
+                        <img alt="文章预览" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCxXRh3tv5Pr05r--RNMfLIhp9zSiqLfYPh2c0blfnlOWnzZTd-OsIW8ycd2OrjFELPx5tUqOpzAp6SSV3oe3Y5UDCcgMqxctnQH804-jkEfH-1L8Yy5B4RhpT82Je4vYQ3AMjXSPKWTE2BpptJpJ5cammJPqZnF6K0NGAKDOaj5x6PH5piZ7LnFuxM1U9gGbQaNcZ3p4YCTvFjUOFi-OLngf0KIPNvBEvzFz9GiNX-YrCNrOzE7p8nIsGu5fLuhqzAueaWeRpPqsM"/>
+                    </div>
+                    <span class="text-xs font-mono text-blue-500 mb-2">设计理论</span>
+                    <h3 class="text-xl font-bold mb-3 leading-tight group-hover:text-blue-600 transition-colors">扁平化界面中的深度艺术。</h3>
+                    <p class="text-gray-500 text-sm mb-6 flex-grow">探讨光影如何定义现代移动操作系统中的层次结构。</p>
+                    <div class="text-xs text-gray-400">2024年5月24日 • 阅读时间 8 分钟</div>
+                </article>
+                
+                <!-- 博客卡片 2 -->
+                <article class="reveal-hidden glass-card p-6 flex flex-col h-full group" data-purpose="blog-card" style="transition-delay: 0.2s;">
+                    <div class="w-full aspect-[4/3] bg-gray-100 rounded-xl mb-6 overflow-hidden">
+                        <img alt="文章预览" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCB5Pd41k_ynkhAXaT9KxrNDaI6DKuTItcdLASIuaSfcBhjTXv9Bd0jSDBEn_UB6otQRDQ9ePy8SIxgkeFmzhpATh25DjBL5wYpguf_wRHwGXVg-hfdaOnBmnEPu4VKdevCeLJEUDRvIqIvS6Zw5GbvdtzQ3FYU3Hn_eejkD9v1lHiLIVrtMYxeUgkbzXoUvETn27EmG3ZMzTbJsjYEwawaw9ngM4brbgJEUi-M9oQ3ABTCmzHyYEUv5NubieF0MrU_Bt9ei2xSCTg"/>
+                    </div>
+                    <span class="text-xs font-mono text-purple-500 mb-2">开发</span>
+                    <h3 class="text-xl font-bold mb-3 leading-tight group-hover:text-purple-600 transition-colors">利用 CSS 容器查询实现动态网格。</h3>
+                    <p class="text-gray-500 text-sm mb-6 flex-grow">为什么视口已不再是响应式设计宇宙的核心。</p>
+                    <div class="text-xs text-gray-400">2024年6月12日 • 阅读时间 12 分钟</div>
+                </article>
+                
+                <!-- 博客卡片 3 -->
+                <article class="reveal-hidden glass-card p-6 flex flex-col h-full group" data-purpose="blog-card" style="transition-delay: 0.3s;">
+                    <div class="w-full aspect-[4/3] bg-gray-100 rounded-xl mb-6 overflow-hidden">
+                        <img alt="文章预览" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDpuOe_3bN-0mxLTvi6uxOUTCi6VkisDxJb1qXHj8sZr2Tm3grnx4FuOlw6ESgfXbqfz4rDn1ziKe8ssy_3dip2aI1gBevdbkufJqQsuVfzs1B-YL9iWkmqkfOZIXXD_0V5bKodmtjstHK7go3agzbVmziF5NbTjUtvVCdbCjj-uS_3HtC-S-2t34PluIo-ZmYZ3Q3GioThMU7SzkesobKXsBWMfMzd2Cw49oIdd1_QEpMEGHMUFexwTZr--Z8SFe-GbUFZgesTPgI"/>
+                    </div>
+                    <span class="text-xs font-mono text-cyan-500 mb-2">商业</span>
+                    <h3 class="text-xl font-bold mb-3 leading-tight group-hover:text-cyan-600 transition-colors">超越订阅模式。</h3>
+                    <p class="text-gray-500 text-sm mb-6 flex-grow">预测数字软件消费与所有权的下一次演进。</p>
+                    <div class="text-xs text-gray-400">2024年7月2日 • 阅读时间 6 分钟</div>
+                </article>
+            </div>
+        </section>
+    </main>
+
+    <!-- 模块 5: AI 聊天机器人界面 -->
+    <aside class="fixed bottom-8 right-8 z-[60]" data-purpose="ai-chatbot">
+        <!-- 聊天切换按钮 -->
+        <button class="w-14 h-14 bg-white shadow-2xl rounded-full flex items-center justify-center hover:scale-110 transition-transform border border-gray-100 group" id="chat-toggle" aria-label="切换聊天">
+            <div class="absolute -top-1 -right-1 w-4 h-4 bg-green-500 border-2 border-white rounded-full"></div>
+            <svg class="w-6 h-6 text-gray-700 group-hover:text-blue-500 transition-colors" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+                <path d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"></path>
+            </svg>
+        </button>
+        
+        <!-- 聊天面板 -->
+        <div class="absolute bottom-20 right-0 w-80 md:w-96 glass-card shadow-2xl opacity-0 translate-y-4 pointer-events-none transition-all duration-300 overflow-hidden flex flex-col max-h-[500px]" id="chat-panel">
+            <div class="bg-white/40 p-4 border-b border-gray-100 flex items-center gap-3">
+                <div class="w-8 h-8 bg-black rounded-lg flex items-center justify-center">
+                    <svg class="w-5 h-5 text-white" fill="currentColor" viewbox="0 0 24 24"><path d="M12 2L4.5 20.29l.71.71L12 18l6.79 3 .71-.71z"></path></svg>
+                </div>
+                <div>
+                    <p class="text-sm font-bold">已连接到 Clawbot</p>
+                    <p class="text-[10px] text-green-600 font-mono flex items-center gap-1">
+                        <span class="w-1.5 h-1.5 bg-green-500 rounded-full animate-pulse"></span> 系统活动中
+                    </p>
+                </div>
+            </div>
+            
+            <div class="flex-grow overflow-y-auto p-4 space-y-4 text-sm" id="chat-messages">
+                <div class="bg-blue-50 text-blue-800 p-3 rounded-2xl rounded-tl-none self-start max-w-[85%]">
+                    你好！我是 Max 的 AI 数字分身。你可以问我关于他的项目、经验或档期的任何问题。
+                </div>
+                <div class="bg-gray-100 text-gray-800 p-3 rounded-2xl rounded-tr-none self-end ml-auto max-w-[85%]">
+                    Max 的下一个自由职业档期是什么时候？
+                </div>
+                <div class="bg-blue-50 text-blue-800 p-3 rounded-2xl rounded-tl-none self-start max-w-[85%]">
+                    他目前的预约已经排到了11月，但非常欢迎建立联系！
+                </div>
+            </div>
+            
+            <div class="p-4 bg-white/40 border-t border-gray-100">
+                <form id="chat-form" class="relative" onsubmit="return false;">
+                    <input id="chat-input" class="w-full bg-white/80 border-none rounded-xl py-2 px-4 pr-10 text-sm focus:ring-2 focus:ring-blue-500/20" placeholder="输入消息..." type="text"/>
+                    <button type="submit" class="absolute right-2 top-1.5 text-blue-500">
+                        <svg class="w-5 h-5" fill="currentColor" viewbox="0 0 24 24"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"></path></svg>
+                    </button>
+                </form>
+            </div>
+        </div>
+    </aside>
+
+    <!-- 模块 6: 页脚 -->
+    <footer class="py-20 border-t border-gray-100 text-center space-y-6" data-purpose="site-footer">
+        <p class="text-gray-400 text-sm">© 2024 Max. Built with Tailwind & Passion.</p>
+        <div class="flex justify-center gap-6">
+            <a class="text-gray-400 hover:text-black transition-colors" href="#">Twitter</a>
+            <a class="text-gray-400 hover:text-black transition-colors" href="#">GitHub</a>
+            <a class="text-gray-400 hover:text-black transition-colors" href="#">LinkedIn</a>
+        </div>
+    </footer>
+
+    <!-- 交互逻辑脚本 -->
+    <script data-purpose="ui-logic">
+        // 切换聊天面板显示/隐藏
+        const chatToggle = document.getElementById('chat-toggle');
+        const chatPanel = document.getElementById('chat-panel');
+        let isChatOpen = false;
+
+        chatToggle.addEventListener('click', () => {
+            isChatOpen = !isChatOpen;
+            if (isChatOpen) {
+                chatPanel.classList.remove('opacity-0', 'translate-y-4', 'pointer-events-none');
+                chatPanel.classList.add('opacity-100', 'translate-y-0', 'pointer-events-auto');
+            } else {
+                chatPanel.classList.add('opacity-0', 'translate-y-4', 'pointer-events-none');
+                chatPanel.classList.remove('opacity-100', 'translate-y-0', 'pointer-events-auto');
+            }
+        });
+
+        // 视口滚动监听动画 (Intersection Observer)
+        const observerOptions = {
+            threshold: 0.15,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('reveal-visible');
+                    // 触发后停止监听
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+
+        // 为带有 reveal-hidden 类的元素绑定监听
+        document.querySelectorAll('.reveal-hidden').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Debug: 处理聊天发送逻辑 (原代码缺失部分)
+        const chatForm = document.getElementById('chat-form');
+        const chatInput = document.getElementById('chat-input');
+        const chatMessages = document.getElementById('chat-messages');
+
+        if (chatForm) {
+            chatForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                const msg = chatInput.value.trim();
+                if (msg) {
+                    // 添加用户消息
+                    const userMsg = document.createElement('div');
+                    userMsg.className = "bg-gray-100 text-gray-800 p-3 rounded-2xl rounded-tr-none self-end ml-auto max-w-[85%]";
+                    userMsg.textContent = msg;
+                    chatMessages.appendChild(userMsg);
+                    chatInput.value = '';
+                    chatMessages.scrollTop = chatMessages.scrollHeight;
+                }
+            });
+        }
+    </script>
+</body>
+</html>
